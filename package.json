@@ -1,0 +1,29 @@
+{
+    "name": "avaliacao_tinnova",
+    "version": "1.0.0",
+    "description": "Avaliacao Tinnova",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/andersonjeronimo/avaliacao_tinnova.git"
+    },
+    "keywords": [
+        "teste",
+        "tinnova"
+    ],
+    "author": "anderson luiz fernandes jeronimo",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/andersonjeronimo/avaliacao_tinnova/issues"
+    },
+    "homepage": "https://github.com/andersonjeronimo/avaliacao_tinnova#readme",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
+    }
+}
