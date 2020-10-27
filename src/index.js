@@ -13,10 +13,12 @@ app.get('/', (req, res) => {
         endpoints: [
             '/ordenacao/bubblesort',
             '/matematica/fatorial',
+            '/matematica/fatorial/{n}',
             '/matematica/multiplos',
+            '/matematica/multiplos/{n}',
             '/eleicoes/apuracao',
             '[GET]/veiculos',
-            '[GET]/veiculos/find',
+            '[GET]/veiculos/find/{field}',
             '[GET]/veiculos/{id}',
             '[POST]/veiculos',
             '[PUT]/veiculos/{id}',

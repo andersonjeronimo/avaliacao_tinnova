@@ -1,18 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const url = require('url');
 
 //exercicio 005
-const Veiculo = require('../models/veiculo');
-let Carro = new Veiculo();
+// const Veiculo = require('../models/veiculo');
+// let Carro = new Veiculo();
 
 //SELECT
 router.get('/', (req, res) => {
     (async() => {
         const db = require('../../database/db');
-        console.log('Começou!');
-        console.log('SELECT * FROM VEICULOS');
         const veiculos = await db.selectVehicles();
-        console.log(veiculos);
+        res.status(200).send(veiculos);
+    })();
+});
+
+//SELECT_BY_QUERY_STRING
+router.get('/find', (req, res) => {
+    (async() => {
+        const db = require('../../database/db');
+        const queryObject = url.parse(req.url, true).query;
+        const veiculos = await db.selectVehiclesByField(queryObject);
         res.status(200).send(veiculos);
     })();
 });
@@ -21,21 +29,8 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     (async() => {
         const db = require('../../database/db');
-        console.log('Começou!');
-        console.log('INSERT INTO VEICULOS');
-        console.log(req.body);
         const result = await db.insertVehicle(req.body);
-        console.log(result);
         res.status(200).send(result);
-    })();
-});
-
-router.get('/find', (req, res) => {
-    (async() => {
-        const db = require('../../database/db');
-        console.log('Começou!');
-        //TODO
-        res.status(200).send({ message: `` });
     })();
 });
 
@@ -43,11 +38,8 @@ router.get('/find', (req, res) => {
 router.get('/:id', (req, res) => {
     (async() => {
         const db = require('../../database/db');
-        console.log('Começou!');
-        const id = req.params.id;
-        console.log(`SELECT * FROM VEICULOS WHERE idveiculo = ${id}`);
+        const id = parseInt(req.params.id);
         const veiculo = await db.selectVehicleById(id);
-        console.log(veiculo);
         res.status(200).send(veiculo);
     })();
 });
@@ -56,22 +48,18 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
     (async() => {
         const db = require('../../database/db');
-        console.log('Começou!');
-        const id = req.params.id;
-        console.log('UPDATE VEICULOS');
-        console.log(req.body);
-        const result2 = await db.updateVehicle(id, req.body);
-        console.log(result2);
-        res.status(200).send(result2);
+        const id = parseInt(req.params.id);
+        let result = await db.updateVehicle(id, req.body);
+        res.status(200).send(result);
     })();
 });
 
 router.patch('/:id', (req, res) => {
     (async() => {
         const db = require('../../database/db');
-        console.log('Começou!');
-        //TODO
-        res.status(200).send({ message: `` });
+        const id = parseInt(req.params.id);
+        let result = await db.updateVehiclePartial(id, req.body);
+        res.status(200).send(result);
     })();
 });
 
@@ -79,12 +67,9 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     (async() => {
         const db = require('../../database/db');
-        console.log('Começou!');
-        console.log('DELETE FROM VEICULOS');
-        const id = req.params.id;
-        const result3 = await db.deleteVehicle(id);
-        console.log(result3);
-        res.status(200).send(result3);
+        const id = parseInt(req.params.id);
+        let result = await db.deleteVehicle(id);
+        res.status(200).send(result);
     })();
 });
 
